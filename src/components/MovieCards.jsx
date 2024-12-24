@@ -2,19 +2,33 @@ import React, { useContext } from "react";
 import { MoviesContext } from "../App";
 import "../style/MoviesCards.css"
 
-// "Title": "Game of Thrones",
-//   "Year": "2011–2019",
-//     "imdbID": "tt0944947",
-//       "Type": "series",
-//         "Poster": "https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_SX300.jpg"
+
 
 const MovieCards = () => {
-  const { moviesList } = useContext(MoviesContext)
+  const { moviesList, page, setPage, totalResults } = useContext(MoviesContext);
+  const totalPages = Math.ceil(totalResults/10)
+
+  const nextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (page < totalPages) {
+      setPage(page - 1)
+    }
+  }
+
+  const movieTitle = (title) => {
+    console.log(title)
+  }
 
   return (
     <>
       <div className="movies-section">
-        {moviesList.map((movie) => (<div className="card">
+        {moviesList.map((movie) => (
+          <div className="card" key={movie.imbdID} onClick={() => movieTitle(movie.Title)} >
           <div className="poster" >
             <img src={movie.Poster} alt="" />
           </div>
@@ -24,6 +38,11 @@ const MovieCards = () => {
             <p>Type : {movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1)}</p>
           </div>
         </div>))}
+      </div>
+
+      <div className="pagination">
+        <button onClick={prevPage} disabled={page === 1 } >prev</button>
+        <button onClick={nextPage} disabled={page === totalPages} >next</button>
       </div>
     </>
   )
