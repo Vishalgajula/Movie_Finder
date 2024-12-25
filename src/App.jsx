@@ -20,7 +20,12 @@ function App() {
 
   return (
     <>
-      <MoviesContext.Provider value={{ moviesList, setMoviesList, baseurl, apikey, page, setPage, totalResults, setTotalResults }}>
+      <MoviesContext.Provider value={{ 
+        baseurl, apikey, 
+        moviesList, setMoviesList, 
+        page, setPage, 
+        totalResults, setTotalResults 
+        }}>
         <Main />
         <MovieCards />
       </MoviesContext.Provider>

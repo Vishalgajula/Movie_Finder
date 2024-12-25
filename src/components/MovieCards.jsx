@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MoviesContext } from "../App";
 import "../style/MoviesCards.css"
 
 
 
 const MovieCards = () => {
-  const { moviesList, page, setPage, totalResults } = useContext(MoviesContext);
+  const { baseurl, apikey, moviesList, page, setPage, totalResults } = useContext(MoviesContext);
   const totalPages = Math.ceil(totalResults/10)
+  const [movieDetails, setMovieDetails] = useState([]);
 
   const nextPage = () => {
     if (page < totalPages) {
@@ -20,9 +21,19 @@ const MovieCards = () => {
     }
   }
 
+  //fetching the individual movie details
   const movieTitle = (title) => {
     console.log(title)
+    fetch(`${baseurl}/?t=${title}&${apikey}`)
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      setMovieDetails(data)
+    })
+    .catch((error) => console.error(error))
   }
+  console.log(movieDetails)
 
   return (
     <>
@@ -36,6 +47,9 @@ const MovieCards = () => {
             <h2 className="title">{movie.Title}</h2>
             <p>Year: {movie.Year} </p>
             <p>Type : {movie.Type.charAt(0).toUpperCase() + movie.Type.slice(1)}</p>
+          </div>
+          <div className="details">
+            <h2>{movieDetails.Title}</h2>
           </div>
         </div>))}
       </div>

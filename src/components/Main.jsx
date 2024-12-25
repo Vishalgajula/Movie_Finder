@@ -27,8 +27,6 @@ const Main = () => {
         console.log(page)
         setMoviesList(data.Search || []);
         setTotalResults(parseInt(data.totalResults, 10));
-        // console.log(totalResults)
-        
       })
       .catch((error) => console.error(error))}
   }
