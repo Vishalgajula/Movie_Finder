@@ -1,0 +1,17 @@
+input {
+    width: 75%;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-btn {
+    background-color: cornflowerblue;
+    color: white;
+    width: 15%;
+    border: none;
+    height: 30px;
+    margin: 10px;
+    border-radius: 5px;
+
+}

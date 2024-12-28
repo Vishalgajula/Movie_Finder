@@ -1,21 +1,45 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { MoviesContext } from "../App";
+import "../style/Main.css"
 
 const Main = () => {
   
   const [searchMovies, setSearchMovies] = useState("")
   
+  
 
   //using useContext hook we are accessing the variables
 
-  const { moviesList, setMoviesList, baseurl, apikey, page, setPage, totalResults, setTotalResults } = useContext(MoviesContext)
+  const { moviesList, setMoviesList, baseurl, apikey, page, setPage, totalResults, setTotalResults, setMovieDetailStatus, setIsLoading, isLoading } = useContext(MoviesContext)
+  const loaderRef = useRef(null)
 
+  //Implemeting infinity scrolling
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !isLoading) {
+        setPageNumber((prevPage) => prevPage + 1);
+      }
+    }, {
+      rootMargin: '100px',
+    });
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+    return () => {
+      if (loaderRef.current) {
+        observer.unobserve(loaderRef.current);
+      }
+    };
+  }, [isLoading]);
 
   const apiFetching = () => {
+    // setIsLoading(true)
     {if (!searchMovies.trim()) {
       console.log("Movie title cannot be empty!!!")
       return;
     }
+    setMovieDetailStatus(false)  // To disable the movie detail or to reset the movie details when fetching
     fetch(`${baseurl}/?s=${searchMovies}&page=${page}&${apikey}`) // url link
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch movie")
@@ -47,31 +71,14 @@ const Main = () => {
       apiFetching()
     }
   }
-  // useEffect(() => {
-  //   console.log(totalResults)
-  // },totalResults)
-  // console.log(totalResults)
-
-  const handlePage = (page) => {
-
-  }
-  // React.useEffect(() => {
-  //   console.log(moviesList)
-  //   console.log("useEffect")
-  // }, [moviesList])
-
-  const handlePageChange = (direction) => {
-    if (direction === "next") {
-      setPage(page + 1);
-    } else if (direction === "prev" && page > 1) {
-      setPage(page - 1);
-    }
-  };
+  
 
 
   return (
     <>
-      <h4>search</h4>
+      <h1>EVA</h1>
+      <h5>the best movie finder</h5>
+      {/* <span>Find the movie you want</span> <br /> */}
 
       <input
         type="text"
@@ -80,7 +87,7 @@ const Main = () => {
         onChange={event => setSearchMovies(event.target.value)}
         onKeyDown={handleChange}
       />
-      <button onClick={apiFetching} >search</button>
+      <button onClick={apiFetching} className="search-btn" >search</button>
       
     </>
   )
