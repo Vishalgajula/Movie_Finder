@@ -1,13 +1,79 @@
 .movies-section {
+  margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
   align-items: center;
   align-content: center;
 }
 
 .card {
   background-color: white;
-  margin: 20px;
   color: black;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
 
+.card:hover {
+  transform: scale(1.1);
+  background-color: black;
+
+}
+
+.poster img {
+  width: 100%;
+  /* Ensures image fills its container */
+  height: auto;
+  border-radius: 4px;
+  /* Slight rounding for images */
+}
+
+.details {
+  text-align: center;
+  margin-top: 10px;
+  background-color: #f4f4f4;
+  width: 100%;
+  /* padding: 10px; */
+  border-radius: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: green;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 30px;
+  cursor: pointer;
+  margin: 0 5px;
+  /* Adds spacing between buttons */
+  border-radius: 4px;
+}
+
+.active-page,
+.page {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.active-page {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
 }

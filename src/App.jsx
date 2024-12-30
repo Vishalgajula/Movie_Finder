@@ -16,38 +16,24 @@ function App() {
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0)
   const [movieDetailStatus, setMovieDetailStatus] = useState(false)
-  const [isloading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
-  
+
   return (
     <>
-      <MoviesContext.Provider value={{ 
-        baseurl, apikey, 
-        moviesList, setMoviesList, 
-        page, setPage, 
+      <MoviesContext.Provider value={{
+        baseurl, apikey,
+        moviesList, setMoviesList,
+        page, setPage,
         totalResults, setTotalResults,
         movieDetail, setMovieDetail,
-        setMovieDetailStatus,
-        isloading, setIsLoading
-        }}>
+        movieDetailStatus, setMovieDetailStatus,
+        isLoading, setIsLoading
+      }}>
 
         <Main />
-
-        <Popup open={movieDetailStatus} onClose={() => setMovieDetailStatus(false)}
-          contentStyle={{
-            width: '80%',
-            // height: 'auto',
-            // padding: '20px',
-            // borderRadius: '10px',
-            background: '#fff',
-            color: "black",
-            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-          }}
-          >
-          {movieDetailStatus ? <MovieDetail /> : ""}
-        </Popup>
-
-        <MovieCards />
+        {movieDetailStatus ? <MovieDetail /> : ""}
+        {movieDetailStatus ? "" : <MovieCards />}
 
       </MoviesContext.Provider>
     </>
