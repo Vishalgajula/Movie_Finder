@@ -69,25 +69,30 @@ const Main = () => {
 
   return (
     <>
+      <div>
+        {isLoading && (
+          <div className="loading-container">
+            {/* hey bro, it will take some time */}
+            <div className="loading-spinner">
+            </div>
+          </div>
+        )}
+      </div>
       <div className="header" >
-        <h1>EVA</h1>
+        <h1 className="title">EVA</h1>
         <h5>the best movie finder</h5>
         {/* <span>Find the movie you want</span> <br /> */}
         <input
           className="searchBox"
           type="text"
-          placeholder="movie title"
+          placeholder="Enter movie title"
           value={searchMovies}
           onChange={event => setSearchMovies(event.target.value)}
           onKeyDown={handleChange}
         />
         <button onClick={apiFetching} className="search-btn" >search</button>
+
       </div>
-      {isLoading && (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-        </div>
-      )}
 
       {errorMsg && (
         <div className="error">

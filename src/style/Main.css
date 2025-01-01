@@ -31,22 +31,30 @@
 }
 
 
-.loading {
-    /* display: none; */
+.loading-container {
+    position: fixed;
+
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    /* Centers vertically */
+    justify-content: center;
+    /* Centers horizontally */
+    z-index: 1000;
 
 }
 
 .loading-spinner {
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-left-color: white;
-    /* Green */
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     animation: spin 1s linear infinite;
-    margin: 20px auto;
 }
 
 @keyframes spin {
@@ -57,11 +65,4 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
 }

@@ -5,7 +5,7 @@ import "../style/MoviesCards.css"
 
 
 const MovieCards = () => {
-  const { baseurl, apikey, moviesList, page, setPage, totalResults, movieDetail, setMovieDetail, setMovieDetailStatus } = useContext(MoviesContext);
+  const { baseurl, apikey, moviesList, page, setPage, totalResults, movieDetail, setMovieDetail, setMovieDetailStatus, isLoading, setIsLoading } = useContext(MoviesContext);
   const totalPages = Math.ceil(totalResults / 10)
 
   const nextPage = () => {
@@ -23,6 +23,7 @@ const MovieCards = () => {
   //fetching the individual movie details
   const movieTitle = (title, year) => {
     console.log(title)
+    setIsLoading(true)
     fetch(`${baseurl}/?t=${title}&y=${year}&plot=full&${apikey}`)
       .then((response) => {
         return response.json()
@@ -32,6 +33,9 @@ const MovieCards = () => {
         setMovieDetailStatus(true)
       })
       .catch((error) => console.error(error))
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -52,8 +56,7 @@ const MovieCards = () => {
           </div>))}
       </div>
 
-      <div className="pagination">
-        <button onClick={prevPage} disabled={page === 1} >prev</button>
+      {totalPages > 0 && (<div className="pagination">
 
         {Array.from({ length: totalPages }, (_, i) => (
           (page === (i + 1)) ?
@@ -61,8 +64,21 @@ const MovieCards = () => {
             (<a key={i + 1} className="page" onClick={() => setPage(i + 1)}  >{i + 1} </a>)
         ))}
 
-        <button onClick={nextPage} disabled={page === totalPages} >next</button>
-      </div >
+        <button
+          onClick={prevPage}
+          disabled={page === 1}
+          style={page === 1 ? { display: "none" } : { display: "inline-block" }}
+        >
+          prev
+        </button>
+        <button
+          onClick={nextPage}
+          disabled={page === totalPages}
+          style={page === totalPages ? { display: "none" } : { display: "inline-block" }}
+        >
+          next
+        </button>
+      </div >)}
     </>
   )
 }

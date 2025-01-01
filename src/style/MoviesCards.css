@@ -1,15 +1,16 @@
 .movies-section {
-  margin: 0;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  align-items: center;
-  align-content: center;
+  align-items: start;
+  /* align-content: start; */
 }
 
 .card {
   background-color: white;
   color: black;
+  box-sizing: border-box;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -24,8 +25,8 @@
 }
 
 .card:hover {
-  transform: scale(1.1);
-  background-color: black;
+  transform: scale(1.01);
+  /* background-color: black; */
 
 }
 
@@ -47,12 +48,13 @@
 }
 
 .pagination {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   margin-top: 20px;
 }
 
 .pagination button {
+  /* display: inline-block; */
   background-color: green;
   color: white;
   border: none;
@@ -62,6 +64,11 @@
   margin: 0 5px;
   /* Adds spacing between buttons */
   border-radius: 4px;
+
+}
+
+.pagination button:disabled {
+  display: none;
 }
 
 .active-page,

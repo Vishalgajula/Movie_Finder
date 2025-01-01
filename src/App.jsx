@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import './App.css'
-import Popup from "reactjs-popup"
+// import Popup from "reactjs-popup"
 import Main from './components/Main'
 import MovieCards from './components/MovieCards';
 import MovieDetail from './components/MovieDetail';
@@ -30,6 +30,7 @@ function App() {
         movieDetailStatus, setMovieDetailStatus,
         isLoading, setIsLoading
       }}>
+
 
         <Main />
         {movieDetailStatus ? <MovieDetail /> : ""}
