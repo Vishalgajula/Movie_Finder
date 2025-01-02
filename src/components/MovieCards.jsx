@@ -20,11 +20,12 @@ const MovieCards = () => {
     }
   }
 
-  //fetching the individual movie details
-  const movieTitle = (title, year) => {
-    console.log(title)
+  //fetching the individual movie details with using unique imbd Id
+  const movieTitle = (imbdID) => {
+    // console.log(title)
     setIsLoading(true)
-    fetch(`${baseurl}/?t=${title}&y=${year}&plot=full&${apikey}`)
+    // console.log(imbdID)
+    fetch(`${baseurl}/?i=${imbdID}&plot=full&${apikey}`)
       .then((response) => {
         return response.json()
       })
@@ -42,7 +43,7 @@ const MovieCards = () => {
     <>
       <div className="movies-section">
         {moviesList.map((movie) => (
-          <div className="card" key={movie.imbdID} onClick={() => movieTitle(movie.Title, movie.Year)} >
+          <div className="card" key={movie.imbdID} onClick={() => movieTitle(movie.imdbID)} >
             {/* fetching individual movie by passing the movie name  */}
             <div className="poster" >
               <img src={movie?.Poster === "N/A" ? "https://placeholder.pics/svg/300x400/DEDEDE/BDBBBB/Poster%20not%20available" : movie?.Poster}
@@ -58,11 +59,11 @@ const MovieCards = () => {
 
       {totalPages > 0 && (<div className="pagination">
 
-        {Array.from({ length: totalPages }, (_, i) => (
+        {/* {Array.from({ length: totalPages }, (_, i) => (
           (page === (i + 1)) ?
             (<a key={i + 1} className="active-page" onClick={() => setPage(i + 1)}  >{i + 1} </a>) :
             (<a key={i + 1} className="page" onClick={() => setPage(i + 1)}  >{i + 1} </a>)
-        ))}
+        ))} */}
 
         <button
           onClick={prevPage}
