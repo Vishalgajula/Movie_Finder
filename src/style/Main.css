@@ -1,14 +1,25 @@
 .header {
     margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.search-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1;
+    margin: auto;
+    width: 600px;
 }
 
 .searchBox {
-    width: 75%;
+    /* width: 75%; */
     height: 25px;
     border: none;
     border-radius: 30px;
     height: 2rem;
     font-size: 1.2rem;
+    flex-grow: 5;
 }
 
 .search-btn {
@@ -16,7 +27,8 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: white;
-    width: 15%;
+    flex-grow: 1;
+    /* width: 15%; */
     border: none;
     height: 35px;
     margin: 10px;
@@ -26,8 +38,8 @@
 
 .search-btn:hover {
     border: 2px solid cornflowerblue;
-    background-color: rgb(248, 235, 235);
-    color: cornflowerblue;
+    background-color: rgb(129, 180, 232);
+    color: white;
 }
 
 
@@ -55,6 +67,18 @@
     width: 80px;
     height: 80px;
     animation: spin 1s linear infinite;
+}
+
+.error {
+    box-sizing: border-box;
+    width: fit-content;
+    margin: auto;
+    color: red;
+    font-weight: 600;
+    background-color: white;
+    padding: 20px 10px;
+    border-radius: 10px;
+
 }
 
 @keyframes spin {

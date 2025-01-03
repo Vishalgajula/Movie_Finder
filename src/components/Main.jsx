@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef, Children } from "react";
 import { MoviesContext } from "../App";
 import "../style/Main.css"
 
@@ -20,7 +20,9 @@ const Main = () => {
     setTotalResults(0)
     {
       if (!searchMovies.trim()) {
-        setErrorMsg("Arey yar atleast enter your name")
+        // setErrorMsg("Enter a movie name")
+        // console.warn("Enter a movie name")
+        window.alert("Enter a movie name");
         return;
       }
 
@@ -41,7 +43,10 @@ const Main = () => {
           setTotalResults(parseInt(data.totalResults, 10));
           setErrorMsg(data?.Error)
         })
-        .catch((error) => console.error(error))
+        .catch((error) => {
+          console.error(error)
+          // window.alert(error);
+        })
         .finally(() => {
           setIsLoading(false)
         })
@@ -82,21 +87,23 @@ const Main = () => {
         <h1 className="title">EVA</h1>
         <h5>the best movie finder</h5>
         {/* <span>Find the movie you want</span> <br /> */}
-        <input
-          className="searchBox"
-          type="text"
-          placeholder="Enter movie title"
-          value={searchMovies}
-          onChange={event => setSearchMovies(event.target.value)}
-          onKeyDown={handleChange}
-        />
-        <button onClick={apiFetching} className="search-btn" >search</button>
+        <div className="search-field">
+          <input
+            className="searchBox"
+            type="text"
+            placeholder="Enter movie title"
+            value={searchMovies}
+            onChange={event => setSearchMovies(event.target.value)}
+            onKeyDown={handleChange}
+          />
+          <button onClick={apiFetching} className="search-btn" >search</button>
+        </div>
 
       </div>
 
       {errorMsg && (
         <div className="error">
-          <h1>{errorMsg} </h1>
+          <p>{errorMsg} </p>
         </div>)}
     </>
   )
